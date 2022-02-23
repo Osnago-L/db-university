@@ -44,3 +44,10 @@
     GROUP BY `teachers`.`name`,`teachers`.`surname`
     ORDER BY `teachers`.`name`,`teachers`.`surname`
 <!-- BONUS -->
+	SELECT `exams`.`course_id`, `students`.`name`,`students`.`surname`, COUNT(`exams`.`course_id`) AS 'tentativi'
+	FROM `courses`
+	INNER JOIN `exams` ON `exams`.`course_id` = `courses`.`id`
+	INNER JOIN `exam_student` ON `exams`.`id` = `exam_student`.`exam_id`
+	INNER JOIN `students` ON `exam_student`.`student_id` = `students`.`id`
+	GROUP BY `exam_student`.`student_id` , `exams`.`course_id`
+	HAVING COUNT(`exams`.`course_id`) - COUNT(CASE WHEN `exam_student`.`vote`<18 THEN 1 END) > 0
