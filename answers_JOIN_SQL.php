@@ -28,11 +28,14 @@
     ON `degrees`.`id` = `degree_id`
     ORDER BY `students`.`name`,`students`.`surname`
 <!-- 5 -->
-    SELECT * 
-    FROM `degrees`
-    INNER JOIN `courses`
-    INNER JOIN `teachers`
-    ON `degrees`.`id` = `courses`.`degree_id`
+    	SELECT * 
+	FROM `degrees`
+	INNER JOIN `courses`
+	ON `courses`.`degree_id`= `degrees`.`id`
+	INNER JOIN `course_teacher` 
+	ON `course_teacher`.`course_id` = `courses`.`id` 
+	INNER JOIN `teachers` 
+	ON `teachers`.`id` = `course_teacher`.`teacher_id`
 <!-- 6 -->
     SELECT `teachers`.`name`,`teachers`.`surname`
     FROM `departments`
